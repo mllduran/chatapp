@@ -4,8 +4,8 @@ import Pusher from 'pusher-js';
 import axios from './axios';
 
 import './App.css';
-import Chat from './Chat';
-import Sidebar from './Sidebar';
+import Chat from './Chat/Chat';
+import Sidebar from './SideBar/Sidebar';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -18,11 +18,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    var pusher = new Pusher('', {
+    const pusher = new Pusher('', {
       cluster: 'ap1'
     });
 
-    var channel = pusher.subscribe('message');
+    const channel = pusher.subscribe('message');
     channel.bind('inserted', (newMessage) => {
       setMessages([...messages, newMessage]);
     });

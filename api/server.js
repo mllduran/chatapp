@@ -22,6 +22,7 @@ const pusher = new Pusher({
   useTLS: true
 });
 
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -35,7 +36,7 @@ db.once('open', () => {
     if (change.operationType === 'insert') {
       const messageDetails = change.fullDocument;
       pusher.trigger('message', 'inserted', {
-        id: messageDetails._id,
+        _id: messageDetails._id,
         name: messageDetails.name,
         message: messageDetails.message,
         timestamp: messageDetails.timestamp,
